@@ -13,12 +13,12 @@ import java.util.stream.Collectors;
 public class AddonsProviderImpl implements AddonsProvider {
 
     @Override
-    public List<Addon> getLatestVaadinAddons() {
+    public List<Addon> getLatestVaadinAddons(int count) {
         RestTemplate restTemplate = new RestTemplate();
         Addons addons = restTemplate.getForObject("https://vaadin.com/Directory/resource/addon/all", Addons.class);
 
         return addons.getAddon().stream()
-                .limit(10)
+                .limit(count)
                 .collect(Collectors.toList());
     }
 }

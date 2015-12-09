@@ -5,6 +5,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.vaadin.hene.dashboard.CacheNames;
 
@@ -23,8 +24,8 @@ public class AddonsController implements Serializable {
 
     @RequestMapping(method= RequestMethod.GET)
     @Cacheable(CacheNames.ADDONS)
-    public @ResponseBody List<Addon> getLatestVaadinAddons() {
-        return vaadinAddonsProvider.getLatestVaadinAddons();
+    public @ResponseBody List<Addon> getLatestVaadinAddons(@RequestParam(value = "count", defaultValue = "10") int count) {
+        return vaadinAddonsProvider.getLatestVaadinAddons(count);
     }
 
 

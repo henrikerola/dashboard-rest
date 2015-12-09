@@ -8,5 +8,5 @@ import java.util.List;
  */
 public interface AddonsProvider extends Serializable {
 
-    List<Addon> getLatestVaadinAddons();
+    List<Addon> getLatestVaadinAddons(int count);
 }
