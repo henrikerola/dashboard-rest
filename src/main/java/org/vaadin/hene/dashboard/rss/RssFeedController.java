@@ -24,7 +24,7 @@ public class RssFeedController implements Serializable {
 
     @RequestMapping(method= RequestMethod.GET)
     @Cacheable(cacheNames = CacheNames.RSS, key="#url")
-    public @ResponseBody  List<RssFeedEntry> getNewestQuestions(@RequestParam("url") String url) {
+    public @ResponseBody  List<RssFeedEntry> getNewestEntries(@RequestParam("url") String url) {
         return questionsProvider.fetchQuestions(url);
     }
 }
