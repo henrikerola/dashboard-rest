@@ -23,8 +23,10 @@ public class RssFeedController implements Serializable {
     private RssFeedProvider questionsProvider;
 
     @RequestMapping(method= RequestMethod.GET)
-    @Cacheable(cacheNames = CacheNames.RSS, key="#url")
-    public @ResponseBody  List<RssFeedEntry> getNewestEntries(@RequestParam("url") String url) {
-        return questionsProvider.fetchQuestions(url);
+    @Cacheable(cacheNames = CacheNames.RSS)
+    public @ResponseBody  List<RssFeedEntry> getNewestEntries(
+            @RequestParam("url") String url,
+            @RequestParam(value = "count", defaultValue = "10") int count) {
+        return questionsProvider.fetchQuestions(url, count);
     }
 }

@@ -16,7 +16,7 @@ import java.util.List;
 public class RssFeedProviderDummy implements RssFeedProvider {
 
     @Override
-    public List<RssFeedEntry> fetchQuestions(String url) {
+    public List<RssFeedEntry> fetchQuestions(String url, int count) {
         List<RssFeedEntry> questions = new ArrayList<>();
 
         questions.add(new RssFeedEntry("DUMMY"));

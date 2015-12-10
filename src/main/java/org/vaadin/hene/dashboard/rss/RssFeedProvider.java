@@ -7,5 +7,5 @@ import java.util.List;
  */
 public interface RssFeedProvider {
 
-    List<RssFeedEntry> fetchQuestions(String url);
+    List<RssFeedEntry> fetchQuestions(String url, int count);
 }

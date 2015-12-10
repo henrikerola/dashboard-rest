@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class RssFeedProviderImpl implements RssFeedProvider {
 
     @Override
-    public List<RssFeedEntry> fetchQuestions(String url) {
+    public List<RssFeedEntry> fetchQuestions(String url, int count) {
         url = url.replaceAll(" ", "%20");
 
         // http://vaadin.com/old-forum/-/message_boards/rss?p_l_id=2890834&_19_mbCategoryId=&_19_groupId=10187&_19_topLink=recent-posts
@@ -28,7 +28,7 @@ public class RssFeedProviderImpl implements RssFeedProvider {
             SyndFeed feed = input.build(new XmlReader(new URL(url)));
             List<RssFeedEntry> questions = feed.getEntries().stream()
                     .map(entry -> new RssFeedEntry(entry.getLink(), entry.getTitle()))
-                    .limit(10)
+                    .limit(count)
                     .collect(Collectors.toList());
             return questions;
         } catch (FeedException e) {
