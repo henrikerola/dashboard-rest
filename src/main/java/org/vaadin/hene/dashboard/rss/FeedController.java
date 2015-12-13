@@ -40,11 +40,11 @@ public class FeedController implements Serializable {
         return urlOptional.map(url -> {
             Map<String, FeedProvider> candidates = applicationContext.getBeansOfType(FeedProvider.class);
             FeedProvider provider = candidates.values().stream()
-                    .filter(p -> p.supports(urlOptional.get()))
+                    .filter(p -> p.supports(name))
                     .findFirst()
                     .orElse(applicationContext.getBean(DefaultFeedProvider.class));
 
-            return provider.fetchEntries(urlOptional.get(), count);
+            return provider.fetchEntries(url, count);
         }).orElseGet(() -> {
             // TODO log here
             return Collections.emptyList();
