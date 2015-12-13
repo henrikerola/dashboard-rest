@@ -5,17 +5,17 @@ import java.io.Serializable;
 /**
  * @author Henri Kerola / Vaadin
  */
-public class RssFeedEntry implements Serializable {
+public class FeedEntry implements Serializable {
 
     private final String url;
     private final String title;
 
-    public RssFeedEntry(String title) {
+    public FeedEntry(String title) {
         this.url = null;
         this.title = title;
     }
 
-    public RssFeedEntry(String url, String title) {
+    public FeedEntry(String url, String title) {
         this.url = url;
         this.title = title;
     }

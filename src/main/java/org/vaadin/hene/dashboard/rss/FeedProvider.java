@@ -5,9 +5,9 @@ import java.util.List;
 /**
  * @author Henri Kerola / Vaadin
  */
-public interface RssFeedProvider {
+public interface FeedProvider {
 
-    List<RssFeedEntry> fetchQuestions(String url, int count);
+    List<FeedEntry> fetchEntries(String url, int count);
 
     boolean supports(String name);
 }

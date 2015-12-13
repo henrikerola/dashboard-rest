@@ -16,18 +16,18 @@ import java.util.stream.Collectors;
  * @author Henri Kerola / Vaadin
  */
 @Service
-public class DefaultRssFeedProvider implements RssFeedProvider {
+public class DefaultFeedProvider implements FeedProvider {
 
     @Override
-    public List<RssFeedEntry> fetchQuestions(String url, int count) {
+    public List<FeedEntry> fetchEntries(String url, int count) {
         url = url.replaceAll(" ", "%20");
 
         // http://vaadin.com/old-forum/-/message_boards/rss?p_l_id=2890834&_19_mbCategoryId=&_19_groupId=10187&_19_topLink=recent-posts
         SyndFeedInput input = new SyndFeedInput();
         try {
             SyndFeed feed = input.build(new XmlReader(new URL(url)));
-            List<RssFeedEntry> questions = feed.getEntries().stream()
-                    .map(entry -> new RssFeedEntry(entry.getLink(), entry.getTitle()))
+            List<FeedEntry> questions = feed.getEntries().stream()
+                    .map(entry -> new FeedEntry(entry.getLink(), entry.getTitle()))
                     .limit(count)
                     .collect(Collectors.toList());
             return questions;

@@ -21,8 +21,8 @@ import java.util.Optional;
  * @author Henri Kerola / Vaadin
  */
 @Controller
-@RequestMapping("/rss/")
-public class RssFeedController implements Serializable {
+@RequestMapping("/feed/")
+public class FeedController implements Serializable {
 
     @Autowired
     private ApplicationContext applicationContext;
@@ -32,19 +32,19 @@ public class RssFeedController implements Serializable {
 
     @RequestMapping(method= RequestMethod.GET)
     @Cacheable(cacheNames = CacheNames.RSS)
-    public @ResponseBody  List<RssFeedEntry> getNewestEntries(
+    public @ResponseBody  List<FeedEntry> getEntries(
             @RequestParam("name") String name,
             @RequestParam(value = "count", defaultValue = "10") int count) {
 
         Optional<String> urlOptional = applicationProperties.getUrlByName(name);
         return urlOptional.map(url -> {
-            Map<String, RssFeedProvider> candidates = applicationContext.getBeansOfType(RssFeedProvider.class);
-            RssFeedProvider provider = candidates.values().stream()
+            Map<String, FeedProvider> candidates = applicationContext.getBeansOfType(FeedProvider.class);
+            FeedProvider provider = candidates.values().stream()
                     .filter(p -> p.supports(urlOptional.get()))
                     .findFirst()
-                    .orElse(applicationContext.getBean(DefaultRssFeedProvider.class));
+                    .orElse(applicationContext.getBean(DefaultFeedProvider.class));
 
-            return provider.fetchQuestions(urlOptional.get(), count);
+            return provider.fetchEntries(urlOptional.get(), count);
         }).orElseGet(() -> {
             // TODO log here
             return Collections.emptyList();
