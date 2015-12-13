@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
  * @author Henri Kerola / Vaadin
  */
 @Service
-public class RssFeedProviderImpl implements RssFeedProvider {
+public class DefaultRssFeedProvider implements RssFeedProvider {
 
     @Override
     public List<RssFeedEntry> fetchQuestions(String url, int count) {
