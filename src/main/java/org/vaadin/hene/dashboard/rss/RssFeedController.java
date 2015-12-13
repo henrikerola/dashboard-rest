@@ -9,10 +9,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.vaadin.hene.dashboard.CacheNames;
+import org.vaadin.hene.dashboard.ApplicationProperties;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * @author Henri Kerola / Vaadin
@@ -24,18 +27,27 @@ public class RssFeedController implements Serializable {
     @Autowired
     private ApplicationContext applicationContext;
 
+    @Autowired
+    private ApplicationProperties applicationProperties;
+
     @RequestMapping(method= RequestMethod.GET)
     @Cacheable(cacheNames = CacheNames.RSS)
     public @ResponseBody  List<RssFeedEntry> getNewestEntries(
-            @RequestParam("url") String url,
+            @RequestParam("name") String name,
             @RequestParam(value = "count", defaultValue = "10") int count) {
 
-        Map<String, RssFeedProvider> candidates = applicationContext.getBeansOfType(RssFeedProvider.class);
-        RssFeedProvider provider = candidates.values().stream()
-                .filter(p -> p.supports(url))
-                .findFirst()
-                .orElse(applicationContext.getBean(DefaultRssFeedProvider.class));
+        Optional<String> urlOptional = applicationProperties.getUrlByName(name);
+        return urlOptional.map(url -> {
+            Map<String, RssFeedProvider> candidates = applicationContext.getBeansOfType(RssFeedProvider.class);
+            RssFeedProvider provider = candidates.values().stream()
+                    .filter(p -> p.supports(urlOptional.get()))
+                    .findFirst()
+                    .orElse(applicationContext.getBean(DefaultRssFeedProvider.class));
 
-        return provider.fetchQuestions(url, count);
+            return provider.fetchQuestions(urlOptional.get(), count);
+        }).orElseGet(() -> {
+            // TODO log here
+            return Collections.emptyList();
+        });
     }
 }
