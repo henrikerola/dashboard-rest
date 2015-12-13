@@ -39,4 +39,9 @@ public class RssFeedProviderImpl implements RssFeedProvider {
 
         return new ArrayList<>();
     }
+
+    @Override
+    public boolean supports(String name) {
+        return false;
+    }
 }

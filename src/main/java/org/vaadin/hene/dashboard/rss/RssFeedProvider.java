@@ -8,4 +8,6 @@ import java.util.List;
 public interface RssFeedProvider {
 
     List<RssFeedEntry> fetchQuestions(String url, int count);
+
+    boolean supports(String name);
 }

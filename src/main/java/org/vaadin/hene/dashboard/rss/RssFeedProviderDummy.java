@@ -33,4 +33,8 @@ public class RssFeedProviderDummy implements RssFeedProvider {
         return questions;
     }
 
+    @Override
+    public boolean supports(String name) {
+        return false;
+    }
 }
