@@ -14,17 +14,17 @@ import java.util.Optional;
 @ConfigurationProperties
 public class ApplicationProperties {
 
-    public Map<String, String> url = new HashMap<>();
+    public Map<String, String> feed = new HashMap<>();
 
     /**
      * This is here for Spring, don't call this method.
      */
     @Deprecated
-    public Map<String, String> getUrl() {
-        return url;
+    public Map<String, String> getFeed() {
+        return feed;
     }
 
-    public Optional<String> getUrlByName(String name) {
-        return Optional.ofNullable(url.get(name));
+    public Optional<String> getFeedUrlByName(String name) {
+        return Optional.ofNullable(feed.get(name));
     }
 }

@@ -36,7 +36,7 @@ public class FeedController implements Serializable {
             @RequestParam("name") String name,
             @RequestParam(value = "count", defaultValue = "10") int count) {
 
-        Optional<String> urlOptional = applicationProperties.getUrlByName(name);
+        Optional<String> urlOptional = applicationProperties.getFeedUrlByName(name);
         return urlOptional.map(url -> {
             Map<String, FeedProvider> candidates = applicationContext.getBeansOfType(FeedProvider.class);
             FeedProvider provider = candidates.values().stream()
