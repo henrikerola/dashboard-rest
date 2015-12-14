@@ -1,4 +1,4 @@
-package org.vaadin.hene.dashboard.rss;
+package org.vaadin.hene.dashboard.feed;
 
 import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.FeedException;

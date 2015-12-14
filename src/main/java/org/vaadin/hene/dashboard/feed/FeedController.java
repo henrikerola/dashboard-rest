@@ -1,4 +1,4 @@
-package org.vaadin.hene.dashboard.rss;
+package org.vaadin.hene.dashboard.feed;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;

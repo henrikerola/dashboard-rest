@@ -1,4 +1,4 @@
-package org.vaadin.hene.dashboard.rss;
+package org.vaadin.hene.dashboard.feed;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.stereotype.Component;

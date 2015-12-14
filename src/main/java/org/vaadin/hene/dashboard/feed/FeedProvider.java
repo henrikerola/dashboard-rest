@@ -1,4 +1,4 @@
-package org.vaadin.hene.dashboard.rss;
+package org.vaadin.hene.dashboard.feed;
 
 import java.util.List;
 

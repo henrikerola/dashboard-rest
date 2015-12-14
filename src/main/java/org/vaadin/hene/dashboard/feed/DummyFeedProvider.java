@@ -1,4 +1,4 @@
-package org.vaadin.hene.dashboard.rss;
+package org.vaadin.hene.dashboard.feed;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
