@@ -16,7 +16,7 @@ public class AddonsProvider implements FeedProvider {
     @Override
     public List<FeedEntry> fetchEntries(String url, int count) {
         RestTemplate restTemplate = new RestTemplate();
-        Addons addons = restTemplate.getForObject("https://vaadin.com/Directory/resource/addon/all", Addons.class);
+        Addons addons = restTemplate.getForObject(url, Addons.class);
 
         return addons.getAddon().stream()
                 .limit(count)
