@@ -23,7 +23,7 @@ public class TwitterController implements Serializable {
 
     @RequestMapping(method= RequestMethod.GET)
     @Cacheable(CacheNames.TWITTER)
-    public @ResponseBody List<Tweet> getLatesVaadinTweets() {
+    public @ResponseBody List<Tweet> getLatestVaadinTweets() {
         Twitter twitter = TwitterFactory.getSingleton();
         Query query = new Query("#vaadin");
         try {
