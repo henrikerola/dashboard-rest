@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.vaadin.hene.dashboard.CacheNames;
 import org.vaadin.hene.dashboard.ApplicationProperties;
 
@@ -30,10 +27,10 @@ public class FeedController implements Serializable {
     @Autowired
     private ApplicationProperties applicationProperties;
 
-    @RequestMapping(method= RequestMethod.GET)
+    @RequestMapping(path = "/{name}", method= RequestMethod.GET)
     @Cacheable(cacheNames = CacheNames.RSS)
     public @ResponseBody  List<FeedEntry> getEntries(
-            @RequestParam("name") String name,
+            @PathVariable("name") String name,
             @RequestParam(value = "count", defaultValue = "10") int count) {
 
         Optional<String> urlOptional = applicationProperties.getFeedUrlByName(name);
