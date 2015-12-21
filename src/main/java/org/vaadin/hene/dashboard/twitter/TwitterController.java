@@ -25,7 +25,7 @@ public class TwitterController implements Serializable {
     @Cacheable(CacheNames.TWITTER)
     public @ResponseBody List<Tweet> getLatestVaadinTweets() {
         Twitter twitter = TwitterFactory.getSingleton();
-        Query query = new Query("#vaadin");
+        Query query = new Query("#vaadin +exclude:retweets");
         try {
             List<Tweet> tweets = new ArrayList<>();
             QueryResult result = twitter.search(query);
